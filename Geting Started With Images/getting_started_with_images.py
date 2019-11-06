@@ -1,6 +1,6 @@
 import cv2
 
-img = cv2.imread('lena.jpg', -1)  # read image
+img = cv2.imread('../images/lena.jpg', -1)  # read image
 
 print(img)
 
