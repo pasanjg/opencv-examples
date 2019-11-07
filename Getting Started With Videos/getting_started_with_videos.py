@@ -12,6 +12,11 @@ while capture.isOpened():
 
     if ret:  # if video is available, ret == TRUE
 
+        capture.set(3, 640)  # 3 - PROP index for WIDTH
+        capture.set(4, 480)  # 4 - PROP index for HEIGHT
+
+        # WIDTH and HEIGHT will take only the values which are available for the camera
+
         print(capture.get(cv2.CAP_PROP_FRAME_WIDTH))  # get other properties
         print(capture.get(cv2.CAP_PROP_FRAME_HEIGHT))
 
