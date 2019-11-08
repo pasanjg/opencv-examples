@@ -4,7 +4,7 @@ import datetime
 capture = cv2.VideoCapture(0)  # arg-input file name or video input device index. Change index to change camera
 
 fourcc = cv2.VideoWriter_fourcc(*'XVID')  # add codec for the output video
-output = cv2.VideoWriter('output.avi', fourcc, 20.0, (640, 480))  # output file name, video codec, framerate, frame size
+output = cv2.VideoWriter('../videos/output.avi', fourcc, 20.0, (640, 480))  # output file name, video codec, framerate, frame size
 
 print(capture.isOpened())  # returns true if video/source available
 
