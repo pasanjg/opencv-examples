@@ -15,11 +15,10 @@ You can play around (run and edit) the Algorithms using Gitpod.io a free online 
 
 ### Downloads
 
-- <img src=" https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Python-logo-notext.svg/1024px-Python-logo-notext.svg.png" width="30" /> [Python](https://www.python.org/downloads/)
-- <img src="https://pbs.twimg.com/profile_images/1169325172811153408/iS7hq4Lw_400x400.jpg" width="40" />[Visual Studio Code]( https://code.visualstudio.com/download )
-- <img src="http://resources.jetbrains.com/storage/products/pycharm/img/meta/pycharm_logo_300x300.png" width="30" />  [PyCharm]( https://www.jetbrains.com/pycharm/download/ )
+- <img src="./resources/python-logo.png" width="30" />  [Python](https://www.python.org/downloads/)
+- <img src="./resources/vscode-logo.png" width="30" />  [Visual Studio Code]( https://code.visualstudio.com/download )  or  <img src="./resources/pycharm-logo.png" width="30" /> [PyCharm]( https://www.jetbrains.com/pycharm/download/ )
 
-
+  
 
 ### Install Packages
 
