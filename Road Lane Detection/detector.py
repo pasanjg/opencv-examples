@@ -5,6 +5,38 @@ import numpy as np
 image = cv2.imread('../images/road.png')
 image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
 
+
+# defining the function to mask the region of interest
+# given the src image and the vertices, it will return masked image
+def region_of_interest(img, vertices):
+    mask = np.zeros_like(img)  # blank matrix that matched the src image
+    # channel_count = img.shape[2]  # retrieve the no. of color channels of the src image [2] gives the channel count
+    # match_mask_color = (255,) * channel_count  # create a match color with the same color channel counts
+    match_mask_color = 255  # no need to use channel count if a grayscale image is used
+    cv2.fillPoly(mask, vertices, match_mask_color)  # fill inside the polygon. Mask everything except the ROI
+    masked_image = cv2.bitwise_and(img, mask)  # create an image with AND operator where the mask matches
+    return masked_image
+
+
+# defining the function to draw the lines on the image
+# give the src image and the line vectors, it will draw the lines on the src image
+def draw_lines(img, lines):
+    img = np.copy(img)  # reassigning the copied image to the same variable
+    # create a blank image of the original img size. [0] - width, [1] - height, 3 - no. of channels
+    line_image = np.zeros((img.shape[0], img.shape[1], 3), dtype=np.uint8)
+
+    # loop around the line vectors to draw all the lines
+    for line in lines:  # line give 4 parameters - (x, y) of first point and second point (x1, y1, x2, y2)
+        for x1, y1, x2, y2 in line:
+            # draw lines on the blank image to merge in the original image
+            cv2.line(line_image, (x1, y1), (x2, y2), (0, 255, 0), thickness=4)
+
+    # merge the lines to the original image
+    img = cv2.addWeighted(img, 0.8, line_image, 1, 0.0)
+
+    return img
+
+
 # get the size of the image
 print(image.shape)
 height = image.shape[0]
@@ -18,20 +50,19 @@ region_of_interest_vertices = [
     (width, height)
 ]
 
+# Canny edge must be detected before creating the cropped image. Otherwise, canny edge will detect the mask edge also
+gray_image = cv2.cvtColor(image, cv2.COLOR_RGB2GRAY)
+canny_image = cv2.Canny(gray_image, 100, 200)
 
-# defining the function to mask the region of interest
-# given the 'src image and the vertices, it will return masked image
-def region_of_interest(img, vertices):
-    mask = np.zeros_like(img)  # blank matrix that matched the src
-    channel_count = img.shape[2]  # retrieve the no. of color channels of the src image [2] gives the channel count
-    match_mask_color = (255,) * channel_count  # create a match color with the same color channel counts
-    cv2.fillPoly(mask, vertices, match_mask_color)  # fill inside the polygon. Mask everything except the ROI
-    masked_image = cv2.bitwise_and(img, mask)  # create an image with AND operator where the mask matches
-    return masked_image
+# create the masked image with the canny image
+cropped_image = region_of_interest(canny_image, np.array([region_of_interest_vertices], np.int32))
 
+# returns the line vector of all the lines detected inside the cropped image
+detected_lines = cv2.HoughLinesP(cropped_image, rho=6, theta=np.pi / 60, threshold=160, lines=np.array([]),
+                                 minLineLength=40, maxLineGap=25)
 
-# create the masked image
-cropped_image = region_of_interest(image, np.array([region_of_interest_vertices], np.int32))
+image_with_lines = draw_lines(image, detected_lines)
 
-plt.imshow(cropped_image)
+# display the cropped image with detected edges
+plt.imshow(image_with_lines)
 plt.show()
