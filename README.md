@@ -1,4 +1,6 @@
-<img src="./resources/python-logo.png" width="120" hspace="100" /> <img src="./images/opencv-logo.png" width="100" hspace="20" />
+<p align="center">
+    <img src="./resources/python-logo.png" width="120" hspace="50" /> <img src="./images/opencv-logo.png" width="100" hspace="50" />
+</p>
 
 ### Resources
 * Homepage: <https://opencv.org>
@@ -18,26 +20,19 @@ You can play around (run and edit) the scripts using [**Gitpod.io**](https://git
 - <img src="./resources/python-logo.png" width="15" />  [Python](https://www.python.org/downloads/)
 - <img src="./resources/vscode-logo.png" width="15" />  [Visual Studio Code]( https://code.visualstudio.com/download ) &nbsp; or &nbsp;  <img src="./resources/pycharm-logo.png" width="15" /> [PyCharm]( https://www.jetbrains.com/pycharm/download/ )
 
-  
+
+### Setup project
+
+```
+$ git clone --depth 1 --single-branch https://github.com/pasanjg/opencv-examples.git
+```
+
 
 ### Install Packages
-
-- **OpenCV**
-
-```
-$ pip install opencv-python
-```
-
-- **Matplotlib**
+Inside the project root,
 
 ```
-$ pip install matplotlib
-```
-
-- **Numpy**
-
-```
-$ pip install numpy
+$ pip install -r requirements.txt
 ```
 
 
@@ -45,8 +40,6 @@ $ pip install numpy
 ### Usage
 
 ```
-$ git clone https://github.com/pasanjg/opencv-examples.git
-$ cd opencv-examples
 $ cd <directory>
 $ python <opencv_python_filename>.py
 ```
